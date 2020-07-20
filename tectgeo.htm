@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">    
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
+
+    
+    
+        
+    <style>
+    /* this is my custom CSS */
+* {
+	margin: 0;
+	padding: 0;
+	outline: none !important;
+	font-family: Arial, Helvetica, sans-serif;/*-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;*/
+	font-family: Arial, Helvetica, sans-serif;
+}
+html, body, div, span, object, iframe, h1, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	font-family: Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 150%;
+	vertical-align: baseline;
+	background: transparent;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+body, html {
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	height: 100%;
+	overflow-x: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, center {
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+}
+nav ul, ul {
+	list-style-type: none;
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+a {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+/* change colours to suit your needs */
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+/* change colours to suit your needs */
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
+}
+del {
+	text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin: 1em 0;
+	padding: 0;
+}
+input, select, textarea, button {
+	vertical-align: middle;
+}
+.no-padding-left {
+	padding-left: 0 !important;
+}
+.no-padding-right {
+	padding-right: 0 !important;
+}
+.no-padding {
+	padding: 0 !important;
+}
+.no-margin {
+	margin: 0 !important;
+}
+.no-radius {
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-ms-border-radius: 0 !important;
+	-o-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	-khtml-border-radius: 0 !important;
+}
+.no-border {
+	border: none !important;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 6;
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.modal-open {
+	padding: 0 !important;
+	overflow-y: scroll;
+}
+.navbar-light .navbar-toggler {
+	margin-right: 20px;
+}
+.no-bg {
+	background: none !important;
+}
+/***************************Default CSS Ends Here*************************/
+.lgg {
+	position: absolute;
+	left: 15px;
+	width: 200px;
+	top: 0;
+}
+.logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 10000;
+	display: block;
+	padding: 15px;
+	background: #FFF;
+	border-radius: 5px;
+	margin-top: 15px;
+	text-align: center;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 20px;
+	color: #333;
+	font-family: 'Josefin Sans', sans-serif;
+}
+.logo sup {
+	font-size: 11px;
+	font-weight: 400;
+}
+.logo:hover, .logo:active, .logo:focus {
+	text-decoration: none;
+}
+.map-details {
+	position: absolute;
+	display: block;
+	width: 480px;
+	right: 0;
+	top: 0;
+	z-index: 1000;
+	padding: 20px;
+	float: right;
+	background: #FFF;
+	height: 100vh;
+	overflow-y: scroll;
+}
+.map-details h2 {
+	font-size: 20px;
+	font-weight: 700;
+	margin-top: 10px;
+}
+.map-details h2 small {
+	cursor: pointer;
+}
+.map-details .btn {
+	margin-top: -8px;
+}
+.map-details h3 {
+	font-size: 15px;
+	display: block;
+	clear: both;
+	padding: 30px 0 0 0;
+}
+.map-details h3 b {
+	font-size: 17px;
+	font-weight: 700;
+	font-family: 'Josefin Sans', sans-serif;
+}
+.map-details .btn-block {
+	margin-top: 15px;
+	font-size: 13px;
+	font-weight: 700;
+	padding: 9px;
+}
+.map-details .alert {
+	margin-top: 15px;
+	font-size: 13px;
+	font-weight: 700;
+	padding: 14px;
+}
+.map-details .form-group .btn {
+	margin-top: 0px;
+	font-size: 14px;
+	padding: 8px 20px;
+	font-weight: 700;
+}
+.map-details table {
+	font-size: 12px;
+	margin-top: 15px;
+}
+.map-details table tr th, .map-details table tr td {
+	padding: 8px;
+}
+.map-details table tr td:last-child {
+	text-align: center;
+}
+.map-details table tr td:last-child a {
+	color: red;
+}
+    </style>
+    <style>
+    /* this is my Media CSS */
+ @media (max-width: 767px) {
+#map {
+	height: 350px !important;
+}
+.map-details {
+	position: relative;
+}
+.logo {
+	margin-bottom: 15px;
+}
+.map-details {
+	width: 100%;
+}
+.map-details .btn {
+	display: block;
+	float: none;
+	margin-top: 15px;
+}
+}
+ @media (max-width: 575px) {
+#map {
+	height: 350px !important;
+}
+.map-details {
+	position: relative;
+}
+.logo {
+	margin-bottom: 15px;
+}
+.map-details {
+	width: 100%;
+}
+.map-details .btn {
+	display: block;
+	float: none;
+	margin-top: 15px;
+}
+}
+
+/* this is my Media CSS */
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet" />
+    <script>
+    var c = console.log;
+    </script>
+    <title>TectGEO V1</title>
+    
+    
+    
+</head>
+<body>
+    
+    <!--map-->
+    
+    
+    
+    
+    <!--lgg-->
+    <div class="lgg"> <a class="logo" href="javascript:void(0);">Tect GEO <sup>TM</sup></a> </div>
+    
+
+  
+  <div class="row">
+    <div class="col" style="padding-left:0px">
+      <div id="map" class="map map-home" style="width:100%;height:100vh;"></div>
+    <div id="map-overlay" class="map-overlay"></div>
+    </div>
+    <div class="col-3">
+     
+        
+        
+        
+        
+        <div class="map-details">
+	<h2 class="dropdown">
+		Welcome <small class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</small>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a class="dropdown-item" href="javascript:void(0);">Logout</a> <a class="dropdown-item" href="javascript:void(0);">Another action</a> <a class="dropdown-item" href="javascript:void(0);">Something else here</a> </div>
+		<a href="javascript:void(0);" class="btn btn-primary fa-pull-right"><i class="fa fa-arrow-left"></i> Back to Product Set</a>
+	</h2>
+	<h3><b>Product Set: </b> Concrete and Wood</h3>
+	<a href="javascript:void(0);" class="btn btn-primary btn-block text-uppercase">Set Primary Territory</a> <a href="javascript:void(0);" class="btn btn-info btn-block text-uppercase">Set Secondary Territory</a>
+	<!--<div class="form-group">
+		<input type="text" name="text" class="form-control" placeholder="Add State By Name" />
+	</div>
+	form-group
+	<div class="form-group">
+		<input type="text" name="text" class="form-control" placeholder="Add County By Name" />
+	</div>
+	
+	<div class="form-group"> <a href="javascript:void(0);" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Save</a> </div>
+	
+	<div class="clearfix"></div>-->
+	
+	<h2>Current Territory Selected</h2>
+	
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"  rel = "stylesheet">
+    
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+<style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .county-table *,
+        .ui-autocomplete * {
+            box-sizing: border-box;
+        }
+        .ui-autocomplete {
+            background: rgb(255, 255, 255);
+            border-radius: 0px;
+            padding: 0px;
+            padding: 0;
+            max-height: 300px;
+            overflow: auto;
+        }
+        .ui-autocomplete .ui-menu-item {
+            border-bottom:1px solid #ccc ;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .add-row {
+            display: flex;
+            white-space: nowrap;
+        }
+        .add-row #input-county {
+            margin: 0 7px;
+            flex-grow: 1;
+            max-width: none;
+        }
+        .county-table #addRow {
+            background-color: #4264fb;
+            color: #fff;
+            border: none;
+            height: 27px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        .county-table {
+            width: 400px;
+            margin: 30px auto;
+            text-align: left;
+            font-size: 14px;
+        }
+        .county-table input[type="text"],
+        .county-table input[type="search"],
+        .county-table select {
+            padding: 5px 10px;
+            border: 1px solid #ccc ;
+            max-width: 170px;
+        }
+        #countyTable {
+            margin-top: 15px;
+            float: left;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .county-table thead {
+            background: #4264fb;
+            width: 100%;
+            color: #fff;
+        }
+        .county-table td,
+        .county-table th {
+            padding: 10px 15px !important;
+            border-left: 1px solid #ddd;
+        }
+        .county-table td:first-child,
+        .county-table th:first-child {
+            display: none;
+        }
+        .add-row {
+            margin-bottom: 20px;
+        }
+        .dataTables_wrapper .dataTables_info,
+        #countyTable_paginate {
+            float: none;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .paginate_button {
+            padding: 5px 10px !important;
+        }
+        span.delete-record {
+            cursor: pointer;
+            color: red;
+        }
+        span.delete-record:hover {
+            color: #4264fb;
+        }
+    #ui-id-1{z-index: 99999}
+    </style>
+
+
+    <div class="county-table">
+        <div class="add-row">
+            <label for="input-county"></label>
+            <input type="text" autocomplete="off" placeholder="Enter County / State Name" name="input-county" id="input-county">
+            <button id="addRow" type="button">Add Row</button>
+        </div>
+
+        <table id="countyTable" class="display">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>County</th>
+                    <th>State</th>
+                    <th class="no-sort">Action</th>
+                </tr>
+            </thead>
+            
+        </table>
+    </div>
+    
+
+<script>
+    var c = console.log;
+    $(document).ready(function(){
+
+        
+        var Counties;
+         Counties = [{}]
+        
+        
+        //  Array of Table Records
+        var tableRecords = [
+            
+            {
+            "fips": 1041,
+            "county_name": "Crenshaw County",
+            "state_abbr": "AL",
+            "state_name": "Alabama",
+            "long_name": "Crenshaw County AL",
+            "sumlev": 50,
+            "region": 3,
+            "division": 6,
+            "state": 1,
+            "county": 41,
+            "crosswalk": "3-6-1-41",
+            "region_name": "South",
+            "division_name": "East South Central"
+            }
+
+        ]
+         // Initialize Data table with tableRecords array
+        var countyTable = $('#countyTable').DataTable({
+            "data": tableRecords,
+            "aaSorting": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }],
+            "columns": [
+                    { "data": "fips" }, // this is hidden on front end
+                    { "data": "county_name" },
+                    { "data": "state_name" },
+                    {
+                        'render': function (data, type, full, meta) {
+                        return '<span class="delete-record">Delete</span>';
+                        }
+                    }
+                ]
+        });
+        
+        
+        // Retrieving Array of all Records from counties-all.json
+        var allRecords = [];
+        allRecords = Counties;
+        
+        
+
+        // Autocomplete from counties-all.Json file
+        localStorage.Counties = JSON.stringify(Counties);
+        $( "#input-county" ).autocomplete({
+           
+            source: function (request, response) {
+                var Counties = JSON.parse(localStorage.Counties);
+                c(Counties);
+                var array = $.map(Counties, function (item,key) {
+                        return {
+                            label: item.county_name,
+                            value: item.county_name,
+                            obj: item,
+                            idx: key
+                        };
+                    })
+                    response($.ui.autocomplete.filter(array, request.term));
+                 
+               
+                
+            
+            }, select: function(event, ui) { 
+                newRow = ui.item.obj; // selected item
+            }
+           
+        });
+        
+        // Adding selected item in data table
+        $('#addRow').on( 'click', function () {
+            if(typeof newRow != 'undefined') {
+                $("#input-county").val('');
+                //check if record already exists in table 
+                var recordExists = tableRecords.some(function(currItem,ind,arr) {
+                    return currItem.fips == newRow.fips;
+                });
+
+                if(recordExists) {
+                    alert("Record Already Exists");
+                }
+                else { // updating table and tablerecords array if record already dont exist
+                    
+                    if(newRow.fips < 100) {
+                        addState (newRow);
+                        return;
+                    }
+                    
+                    var data = {
+                        "fips":newRow.fips,
+                        "county_name":newRow.county_name,
+                        "state_name":newRow.state_name
+                    };   
+                    countyTable.row.add(data).draw( false );
+                    tableRecords.push(newRow) 
+                    newRow = null
+                }
+            }
+            else {
+                alert("Please Select Valid County")
+            }
+        });
+
+        // delete record from table
+        $('.county-table').on('click','tr .delete-record',function(){
+            var deleteRowId = $(this).parents('tr').find("td:first").text();
+            $(this).parents('tr').addClass('deleted');
+            countyTable.row('.deleted').remove().draw(false); // record removed from table
+
+            //remove record from tableRecords Array
+            let deleteIndex = tableRecords.findIndex(function(currItem,ind,arr) {
+                return currItem.fips == deleteRowId;
+            });
+            tableRecords.splice(deleteIndex,1)
+        })
+
+        // Javascript commands to delete row from table based on ID
+        function deleteRow(countyID) {
+            $('.county-table tr td:first-child').each(function(){
+                if($(this).text() == countyID) {
+                    $(this).parents('tr').addClass('deleted');
+                    countyTable.row('.deleted').remove().draw(false);
+                }
+            });
+            //remove record from tableRecords Array
+            let deleteIndex = tableRecords.findIndex(function(currItem,ind,arr) {
+                return currItem.fips == countyID;
+            });
+            tableRecords.splice(deleteIndex,1)
+        }
+
+        // Javascript commands to add row to table based on ID
+        function addRow(countyID) {
+            
+            //add record to tableRecords Array
+            let addIndex = allRecords.findIndex(function(currItem,ind,arr) {
+                return currItem.fips == countyID;
+            });
+            if(addIndex != -1) {
+                var newRecord = allRecords[addIndex];
+                var data = {
+                    "fips":newRecord.fips,
+                    "county_name":newRecord.county_name,
+                    "state_name":newRecord.state_name
+                };   
+                countyTable.row.add(data).draw( false );
+                tableRecords.push(newRecord) 
+            }
+            else {
+                alert("Invalid County ID")
+            }
+        }
+        
+        function addState (state) {
+            c(state);
+            for(var i = 0; i < Counties.length; i++) {
+                if(Counties[i].state_name == state.state_name) {
+                    addRow(Counties[i].fips);
+                }
+            }
+        }
+
+    })
+
+</script>
+    
+	
+	<!--clearfix--><br />
+	<div class="form-group"> <a href="javascript:void(0);" class="btn btn-success text-uppercase"><i class="fa fa-save"></i> Save</a> </div>
+	<!--form-group--> 
+
+    
+    </div>
+    
+    
+    
+    
+    <style>
+    /*.map-overlay {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        position: absolute;
+        width: 25%;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+        display: none;
+    }*/
+    .marker {
+  background-image: url('https://res.cloudinary.com/dzpkqiylk/image/upload/e_colorize,co_rgb:ff9200/v1594950491/36962_pxs0i9.png');
+  background-size: cover;
+        background-color: transparent;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+</style>
+
+    <script>
+var states = [
+  {
+    "id": 1,
+    "name": "Alabama",
+    "fips": 1,
+    "state_abbr": "AL",
+    "lat": 32.318231,
+    "lng": -86.902298
+  },
+  {
+    "id": 2,
+    "name": "Alaska",
+    "fips": 2,
+    "state_abbr": "AK",
+    "lat": 63.588753,
+    "lng": -154.493062
+  },
+  {
+    "id": 3,
+    "name": "Arizona",
+    "fips": 4,
+    "state_abbr": "AZ",
+    "lat": 34.048928,
+    "lng": -111.093731
+  },
+  {
+    "id": 4,
+    "name": "Arkansas",
+    "fips": 5,
+    "state_abbr": "AR",
+    "lat": 35.20105,
+    "lng": -91.831833
+  },
+  {
+    "id": 5,
+    "name": "California",
+    "fips": 6,
+    "state_abbr": "CA",
+    "lat": 36.778261,
+    "lng": -119.417932
+  },
+  {
+    "id": 6,
+    "name": "Colorado",
+    "fips": 8,
+    "state_abbr": "CO",
+    "lat": 39.550051,
+    "lng": -105.782067
+  },
+  {
+    "id": 7,
+    "name": "Connecticut",
+    "fips": 9,
+    "state_abbr": "CT",
+    "lat": 41.603221,
+    "lng": -73.087749
+  },
+  {
+    "id": 8,
+    "name": "Delaware",
+    "fips": 10,
+    "state_abbr": "DE",
+    "lat": 38.910832,
+    "lng": -75.52767
+  },
+  {
+    "id": 9,
+    "name": "District of Columbia",
+    "fips": 11,
+    "state_abbr": "DC",
+    "lat": 38.905985,
+    "lng": -77.033418
+  },
+  {
+    "id": 10,
+    "name": "Florida",
+    "fips": 12,
+    "state_abbr": "FL",
+    "lat": 27.664827,
+    "lng": -81.515754
+  },
+  {
+    "id": 11,
+    "name": "Georgia",
+    "fips": 13,
+    "state_abbr": "GA",
+    "lat": 32.157435,
+    "lng": -82.907123
+  },
+  {
+    "id": 12,
+    "name": "Hawaii",
+    "fips": 15,
+    "state_abbr": "HI",
+    "lat": 19.898682,
+    "lng": -155.665857
+  },
+  {
+    "id": 13,
+    "name": "Idaho",
+    "fips": 16,
+    "state_abbr": "ID",
+    "lat": 44.068202,
+    "lng": -114.742041
+  },
+  {
+    "id": 14,
+    "name": "Illinois",
+    "fips": 17,
+    "state_abbr": "IL",
+    "lat": 40.633125,
+    "lng": -89.398528
+  },
+  {
+    "id": 15,
+    "name": "Indiana",
+    "fips": 18,
+    "state_abbr": "IN",
+    "lat": 40.551217,
+    "lng": -85.602364
+  },
+  {
+    "id": 16,
+    "name": "Iowa",
+    "fips": 19,
+    "state_abbr": "IA",
+    "lat": 41.878003,
+    "lng": -93.097702
+  },
+  {
+    "id": 17,
+    "name": "Kansas",
+    "fips": 20,
+    "state_abbr": "KS",
+    "lat": 39.011902,
+    "lng": -98.484246
+  },
+  {
+    "id": 18,
+    "name": "Kentucky",
+    "fips": 21,
+    "state_abbr": "KY",
+    "lat": 37.839333,
+    "lng": -84.270018
+  },
+  {
+    "id": 19,
+    "name": "Louisiana",
+    "fips": 22,
+    "state_abbr": "LA",
+    "lat": 31.244823,
+    "lng": -92.145024
+  },
+  {
+    "id": 20,
+    "name": "Maine",
+    "fips": 23,
+    "state_abbr": "ME",
+    "lat": 45.253783,
+    "lng": -69.445469
+  },
+  {
+    "id": 21,
+    "name": "Maryland",
+    "fips": 24,
+    "state_abbr": "MD",
+    "lat": 39.045755,
+    "lng": -76.641271
+  },
+  {
+    "id": 22,
+    "name": "Massachusetts",
+    "fips": 25,
+    "state_abbr": "MA",
+    "lat": 42.407211,
+    "lng": -71.382437
+  },
+  {
+    "id": 23,
+    "name": "Michigan",
+    "fips": 26,
+    "state_abbr": "MI",
+    "lat": 44.314844,
+    "lng": -85.602364
+  },
+  {
+    "id": 24,
+    "name": "Minnesota",
+    "fips": 27,
+    "state_abbr": "MN",
+    "lat": 46.729553,
+    "lng": -94.6859
+  },
+  {
+    "id": 25,
+    "name": "Mississippi",
+    "fips": 28,
+    "state_abbr": "MS",
+    "lat": 32.354668,
+    "lng": -89.398528
+  },
+  {
+    "id": 26,
+    "name": "Missouri",
+    "fips": 29,
+    "state_abbr": "MO",
+    "lat": 37.964253,
+    "lng": -91.831833
+  },
+  {
+    "id": 27,
+    "name": "Montana",
+    "fips": 30,
+    "state_abbr": "MT",
+    "lat": 46.879682,
+    "lng": -110.362566
+  },
+  {
+    "id": 28,
+    "name": "Nebraska",
+    "fips": 31,
+    "state_abbr": "NE",
+    "lat": 41.492537,
+    "lng": -99.901813
+  },
+  {
+    "id": 29,
+    "name": "Nevada",
+    "fips": 32,
+    "state_abbr": "NV",
+    "lat": 38.80261,
+    "lng": -116.419389
+  },
+  {
+    "id": 30,
+    "name": "New Hampshire",
+    "fips": 33,
+    "state_abbr": "NH",
+    "lat": 43.193852,
+    "lng": -71.572395
+  },
+  {
+    "id": 31,
+    "name": "New Jersey",
+    "fips": 34,
+    "state_abbr": "NJ",
+    "lat": 40.058324,
+    "lng": -74.405661
+  },
+  {
+    "id": 32,
+    "name": "New Mexico",
+    "fips": 35,
+    "state_abbr": "NM",
+    "lat": 34.97273,
+    "lng": -105.032363
+  },
+  {
+    "id": 33,
+    "name": "New York",
+    "fips": 36,
+    "state_abbr": "NY",
+    "lat": 43.299428,
+    "lng": -74.217933
+  },
+  {
+    "id": 34,
+    "name": "North Carolina",
+    "fips": 37,
+    "state_abbr": "NC",
+    "lat": 35.759573,
+    "lng": -79.0193
+  },
+  {
+    "id": 35,
+    "name": "North Dakota",
+    "fips": 38,
+    "state_abbr": "ND",
+    "lat": 47.551493,
+    "lng": -101.002012
+  },
+  {
+    "id": 36,
+    "name": "Ohio",
+    "fips": 39,
+    "state_abbr": "OH",
+    "lat": 40.417287,
+    "lng": -82.907123
+  },
+  {
+    "id": 37,
+    "name": "Oklahoma",
+    "fips": 40,
+    "state_abbr": "OK",
+    "lat": 35.007752,
+    "lng": -97.092877
+  },
+  {
+    "id": 38,
+    "name": "Oregon",
+    "fips": 41,
+    "state_abbr": "OR",
+    "lat": 43.804133,
+    "lng": -120.554201
+  },
+  {
+    "id": 39,
+    "name": "Pennsylvania",
+    "fips": 42,
+    "state_abbr": "PA",
+    "lat": 41.203322,
+    "lng": -77.194525
+  },
+  {
+    "id": 40,
+    "name": "Rhode Island",
+    "fips": 44,
+    "state_abbr": "RI",
+    "lat": 41.580095,
+    "lng": -71.477429
+  },
+  {
+    "id": 41,
+    "name": "South Carolina",
+    "fips": 45,
+    "state_abbr": "SC",
+    "lat": 33.836081,
+    "lng": -81.163725
+  },
+  {
+    "id": 42,
+    "name": "South Dakota",
+    "fips": 46,
+    "state_abbr": "SD",
+    "lat": 43.969515,
+    "lng": -99.901813
+  },
+  {
+    "id": 43,
+    "name": "Tennessee",
+    "fips": 47,
+    "state_abbr": "TN",
+    "lat": 35.517491,
+    "lng": -86.580447
+  },
+  {
+    "id": 44,
+    "name": "Texas",
+    "fips": 48,
+    "state_abbr": "TX",
+    "lat": 31.968599,
+    "lng": -99.901813
+  },
+  {
+    "id": 45,
+    "name": "Utah",
+    "fips": 49,
+    "state_abbr": "UT",
+    "lat": 39.32098,
+    "lng": -111.093731
+  },
+  {
+    "id": 46,
+    "name": "Vermont",
+    "fips": 50,
+    "state_abbr": "VT",
+    "lat": 44.558803,
+    "lng": -72.577841
+  },
+  {
+    "id": 47,
+    "name": "Virginia",
+    "fips": 51,
+    "state_abbr": "VA",
+    "lat": 37.431573,
+    "lng": -78.656894
+  },
+  {
+    "id": 48,
+    "name": "Washington",
+    "fips": 53,
+    "state_abbr": "WA",
+    "lat": 47.751074,
+    "lng": -120.740139
+  },
+  {
+    "id": 49,
+    "name": "West Virginia",
+    "fips": 54,
+    "state_abbr": "WV",
+    "lat": 38.597626,
+    "lng": -80.454903
+  },
+  {
+    "id": 50,
+    "name": "Wisconsin",
+    "fips": 55,
+    "state_abbr": "WI",
+    "lat": 43.78444,
+    "lng": -88.787868
+  },
+  {
+    "id": 51,
+    "name": "Wyoming",
+    "fips": 56,
+    "state_abbr": "WY",
+    "lat": 43.075968,
+    "lng": -107.290284
+  }
+];
+
+</script>
+<script>
+
+    
+   
+// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+    var c = console.log;
+	mapboxgl.accessToken = 'pk.eyJ1IjoiamVybWVsbGFkZCIsImEiOiJjazJyc3hndmEwaWY2M29vODZxeXFlZXAxIn0.ouWq4dGYc207H9JJZoPrVA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        //style: 'mapbox://styles/mapbox/light-v9',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-98, 38.88],
+        minZoom: 2,
+        zoom: 3
+    });
+
+    var overlay = document.getElementById('map-overlay');
+
+    // Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+        closeButton: false
+    });
+
+    map.on('load', function() {
+        // Add the source to query. In this example we're using
+        // county polygons uploaded as vector tiles
+        map.addSource('counties', {
+            'type': 'vector',
+            'url': 'mapbox://mapbox.82pkq93d'
+        });
+        
+        var counties_loaded = 0;
+        
+          // Attach map zoom handler
+        map.on('zoomend', function (e) {
+      
+       if (map.getZoom() > 4) {
+           if(counties_loaded) return;
+           else counties_loaded = 1;
+           
+           map.addLayer(
+                {
+                    'id': 'counties',
+                    'type': 'fill',
+                    'source': 'counties',
+                    'source-layer': 'original',
+                    'paint': {
+                        'fill-outline-color': 'rgba(0,0,0,0.1)',
+                        'fill-color': 'rgba(0,0,0,0.1)'
+                    },
+
+                },
+                'settlement-label'
+            ); // Place polygon under these labels.
+
+            map.addLayer(
+                {
+                    'id': 'counties-highlighted',
+                    'type': 'fill',
+                    'source': 'counties',
+                    'source-layer': 'original',
+                    'paint': {
+                        'fill-outline-color': '#484896',
+                        'fill-color': '#6e599f',
+                        'fill-opacity': 0.75
+                    },
+                    'filter': ['in', 'COUNTY', '']
+                },
+                'settlement-label'
+            ); // Place polygon under these labels.
+           
+            
+
+           
+
+            map.on('mousemove', 'counties', function(e) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+                //c(e.features);
+                // Single out the first found feature.
+                var feature = e.features[0];
+
+                // Query the counties layer visible in the map. Use the filter
+                // param to only collect results that share the same county name.
+                var relatedFeatures = map.querySourceFeatures('counties', {
+                    sourceLayer: 'original',
+                    filter: ['in', 'COUNTY', feature.properties.COUNTY]
+                });
+
+                // Render found features in an overlay.
+                overlay.innerHTML = '';
+
+                // Total the population of all features
+                var populationSum = relatedFeatures.reduce(function(memo, feature) {
+                    return memo + feature.properties.population;
+                }, 0);
+
+                var title = document.createElement('strong');
+                title.textContent =
+                    feature.properties.COUNTY +
+                    ' (' +
+                    relatedFeatures.length +
+                    ' found)';
+
+                var population = document.createElement('div');
+                population.textContent =
+                    'Total population: ' + populationSum.toLocaleString();
+
+                overlay.appendChild(title);
+                overlay.appendChild(population);
+                overlay.style.display = 'block';
+
+                // Add features that share the same county name to the highlighted layer.
+                map.setFilter('counties-highlighted', [
+                    'in',
+                    'FIPS',
+                    feature.properties.FIPS
+                ]);
+
+                // Display a popup with the name of the county
+                popup
+                    .setLngLat(e.lngLat)
+                    .setText(feature.properties.COUNTY)
+                    .addTo(map);
+            });
+
+            map.on('click', 'counties', function(e) {
+                c(e.features[0].properties.COUNTY,e.features[0].properties.FIPS);
+
+            });
+           
+           
+            map.on('mouseleave', 'counties', function() {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+                map.setFilter('counties-highlighted', ['in', 'COUNTY', '']);
+                overlay.style.display = 'none';
+            });
+
+       }
+    
+    else {
+        
+        // Removing the counties
+        //counties_loaded = 0;
+        
+       
+        
+    }
+    
+          
+                
+                
+            
+        
+            
+    
+   });
+        
+     
+                
+        
+        for(var i = 0; i < states.length; i++) {
+         	   
+               
+                  
+           // Skip DC
+            if(states[i].fips == 11) continue;
+            
+                
+             // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+              // make a marker for each feature and add it to the map
+            var new_marker = new mapboxgl.Marker(el)
+              .setLngLat([states[i].lng, states[i].lat])
+              .addTo(map);
+            new_marker.jermel = states[i].fips;
+             //c(new_marker)   
+           
+              continue;      
+            
+                
+             } 
+            
+        
+         
+        
+        
+     
+        
+        
+        
+    });
+    
+    
+
+
+
+</script>    
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+  </div>
+
+    
+    
+
+    
+</body>
+</html>
+
+
+
+

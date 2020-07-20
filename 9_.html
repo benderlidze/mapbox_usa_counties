@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+
+    <style>
+        /* this is my custom CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none !important;
+            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html,
+        body,
+        div,
+        span,
+        object,
+        iframe,
+        h1,
+        p,
+        blockquote,
+        pre,
+        abbr,
+        address,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        samp,
+        small,
+        strong,
+        sub,
+        sup,
+        var,
+        b,
+        i,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 150%;
+            vertical-align: baseline;
+            background: transparent;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        body,
+        html {
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section,
+        center {
+            display: block;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        nav ul,
+        ul {
+            list-style-type: none;
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
+        }
+
+        a {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+
+        /* change colours to suit your needs */
+        ins {
+            background-color: #ff9;
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* change colours to suit your needs */
+        mark {
+            background-color: #ff9;
+            color: #000;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        abbr[title],
+        dfn[title] {
+            border-bottom: 1px dotted;
+            cursor: help;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #cccccc;
+            margin: 1em 0;
+            padding: 0;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            vertical-align: middle;
+        }
+
+        .no-padding-left {
+            padding-left: 0 !important;
+        }
+
+        .no-padding-right {
+            padding-right: 0 !important;
+        }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .no-margin {
+            margin: 0 !important;
+        }
+
+        .no-radius {
+            border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            -ms-border-radius: 0 !important;
+            -o-border-radius: 0 !important;
+            -webkit-border-radius: 0 !important;
+            -khtml-border-radius: 0 !important;
+        }
+
+        .no-border {
+            border: none !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 6;
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .modal-open {
+            padding: 0 !important;
+            overflow-y: scroll;
+        }
+
+        .navbar-light .navbar-toggler {
+            margin-right: 20px;
+        }
+
+        .no-bg {
+            background: none !important;
+        }
+
+        /***************************Default CSS Ends Here*************************/
+        .lgg {
+            position: absolute;
+            left: 15px;
+            width: 200px;
+            top: 0;
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            display: block;
+            padding: 15px;
+            background: #FFF;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 20px;
+            color: #333;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .logo sup {
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        .logo:hover,
+        .logo:active,
+        .logo:focus {
+            text-decoration: none;
+        }
+
+        .map-details {
+            position: absolute;
+            display: block;
+            width: 480px;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+            padding: 20px;
+            float: right;
+            background: #FFF;
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .map-details h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .map-details h2 small {
+            cursor: pointer;
+        }
+
+        .map-details .btn {
+            margin-top: -8px;
+        }
+
+        .map-details h3 {
+            font-size: 15px;
+            display: block;
+            clear: both;
+            padding: 30px 0 0 0;
+        }
+
+        .map-details h3 b {
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .map-details .btn-block {
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 9px;
+        }
+
+        .map-details .alert {
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 14px;
+        }
+
+        .map-details .form-group .btn {
+            margin-top: 0px;
+            font-size: 14px;
+            padding: 8px 20px;
+            font-weight: 700;
+        }
+
+        .map-details table {
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .map-details table tr th,
+        .map-details table tr td {
+            padding: 8px;
+        }
+
+        .map-details table tr td:last-child {
+            text-align: center;
+        }
+
+        .map-details table tr td:last-child a {
+            color: red;
+        }
+    </style>
+    <style>
+        /* this is my Media CSS */
+        @media (max-width: 767px) {
+            #map {
+                height: 350px !important;
+            }
+
+            .map-details {
+                position: relative;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .map-details {
+                width: 100%;
+            }
+
+            .map-details .btn {
+                display: block;
+                float: none;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            #map {
+                height: 350px !important;
+            }
+
+            .map-details {
+                position: relative;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .map-details {
+                width: 100%;
+            }
+
+            .map-details .btn {
+                display: block;
+                float: none;
+                margin-top: 15px;
+            }
+        }
+
+        /* this is my Media CSS */
+    </style>
+
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+
+
+        /*the container must be positioned relative:*/
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+
+        #selectedList {
+            overflow-y: auto;
+            max-height: calc(100vh - 150px);
+        }
+
+        .fips-list {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #eee;
+            justify-content: space-between;
+        }
+
+        .fips-list>div {
+            display: flex;
+            margin: 5px;
+            white-space: nowrap;
+        }
+
+        .remove {
+            cursor: pointer;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+        }
+
+        #savedSelections {
+            margin: 10px;
+
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .county-table *,
+        .ui-autocomplete * {
+            box-sizing: border-box;
+        }
+
+        .ui-autocomplete {
+            background: rgb(255, 255, 255);
+            border-radius: 0px;
+            padding: 0px;
+            padding: 0;
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .ui-autocomplete .ui-menu-item {
+            border-bottom: 1px solid #ccc;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .add-row {
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .add-row #input-county {
+            margin: 0 7px;
+            flex-grow: 1;
+            max-width: none;
+        }
+
+        .county-table #addRow {
+            background-color: #4264fb;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            padding: 10px 15px;
+        }
+
+        .county-table {
+            width: 400px;
+            margin: 30px auto;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .county-table input[type="text"],
+        .county-table input[type="search"],
+        .county-table select {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            max-width: 170px;
+        }
+
+        #countyTable {
+            margin-top: 15px;
+            float: left;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .county-table thead {
+            background: #4264fb;
+            width: 100%;
+            color: #fff;
+        }
+
+        .county-table td,
+        .county-table th {
+            padding: 10px 15px !important;
+            border-left: 1px solid #ddd;
+        }
+
+        .county-table td:first-child,
+        .county-table th:first-child {
+            /* display: none; */
+        }
+
+        .add-row {
+            margin-bottom: 20px;
+        }
+
+        .dataTables_wrapper .dataTables_info,
+        #countyTable_paginate {
+            float: none;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .paginate_button {
+            padding: 5px 10px !important;
+        }
+
+        span.delete-record {
+            cursor: pointer;
+            color: red;
+        }
+
+        span.delete-record:hover {
+            color: #4264fb;
+        }
+
+        #ui-id-1 {
+            z-index: 99999
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="row h-100">
+        <div class="col-8">
+            <div id="map"></div>
+        </div>
+        <div class="col-4">
+
+            <div>
+                <button class="btn btn-success getJSON"><i class="fa fa-save"></i> Json</button>
+                <button class="btn btn-success text-uppercase saveSelection"><i class="fa fa-save"></i> Save </button>
+                <button class="btn btn-danger newSelection">Clear all</button>
+            </div>
+            <div id="savedSelections"></div>
+            <div id="selectedList"></div>
+
+            <div class="county-table">
+                <div class="add-row">
+                    <label for="input-county"></label>
+                    <input type="text" autocomplete="off" placeholder="Enter County / State Name" name="input-county"
+                        id="input-county">
+                    <button id="addRow" type="button">Add Row</button>
+                </div>
+
+                <table id="countyTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>County</th>
+                            <th>State</th>
+                            <th class="no-sort">Action</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        const shades = ['#d3d3d3', '#bdbdbd', '#a8a8a8', '#939393', '#7e7e7e', '#696969', '#545454', '#3f3f3f', '#2a2a2a', '#151515', '#000000']
+        const selectedList = document.getElementById("selectedList");
+        const savedSelections = document.getElementById("savedSelections");
+        const selectedFIPS = [];
+        const savedCounties = [];
+        let countyBorders = [];
+
+
+        //  Array of Table Records
+        var Counties = [];
+        const tableRecords_ = table();
+        var allRecords = [];
+
+        function table(spec) {
+            let data = [];
+            const deleteRow = function (deleteRowId) {
+                data = data.filter(i => +i.fips !== +deleteRowId);
+            }
+            const addRow = function (row) {
+                let index = data.findIndex(function (currItem, ind, arr) {
+                    return currItem.fips === row.fips;
+                });
+                if (index === -1) {
+                    data.push(row)
+                    return true
+                } else {
+                    return false
+                }
+            };
+            const getAllRows = function () {
+                return data
+            }
+            const getRowById = function () {
+                return data
+            }
+            const clearAllRows = function () {
+                data.length = 0
+            }
+            const toggleByFIPS = function (row) {
+                let index = data.findIndex(function (currItem, ind, arr) {
+                    return currItem.fips === row.fips;
+                });
+                if (index === -1) {
+                    data.push(row)
+                } else {
+                    data = data.filter(i => i.fips !== row.fips)
+                }
+            }
+            return Object.freeze({
+                deleteRow,
+                addRow,
+                getAllRows,
+                getRowById,
+                clearAllRows,
+                toggleByFIPS
+            });
+        }
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZGVybGlkemUiLCJhIjoiY2pud3c0MnN1MDdraTN4cXBraDR3MHdyaCJ9.OsQLWGIWOutuIXCHgT8coQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-98, 38.88],
+            minZoom: 2,
+            zoom: 3
+        });
+
+        var overlay = document.getElementById('map-overlay');
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new mapboxgl.Popup({
+            closeButton: false
+        });
+
+        map.on('load', function () {
+
+            //for the shapefiles in the files folder 
+            shp("counties.zip").then(function (geojson) {
+                countyBorders = geojson
+            });
+
+            map.loadImage('icons8-plus-64.png',
+                function (error, image) {
+                    if (error) throw error;
+                    map.addImage('plusIcon', image);
+                    map.addSource('point', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [{ "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "54", "STATENS": "01779805", "GEOID": "54", "STUSPS": "WV", "NAME": "West Virginia", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 62265662566, "AWATER": 489840834, "INTPTLAT": "+38.6472854", "INTPTLON": "-080.6183274" }, "geometry": { "type": "Point", "coordinates": [-80.57166249332221, 38.669180509840864] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "12", "STATENS": "00294478", "GEOID": "12", "STUSPS": "FL", "NAME": "Florida", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 138911437206, "AWATER": 31398800291, "INTPTLAT": "+28.4574302", "INTPTLON": "-082.4091478" }, "geometry": { "type": "Point", "coordinates": [-82.46439475606918, 28.5284441532442] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "3", "STATEFP": "17", "STATENS": "01779784", "GEOID": "17", "STUSPS": "IL", "NAME": "Illinois", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 143784114293, "AWATER": 6211277447, "INTPTLAT": "+40.1028754", "INTPTLON": "-089.1526108" }, "geometry": { "type": "Point", "coordinates": [-89.13577366408725, 40.136501036324624] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "27", "STATENS": "00662849", "GEOID": "27", "STUSPS": "MN", "NAME": "Minnesota", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 206229176104, "AWATER": 18944967530, "INTPTLAT": "+46.3158148", "INTPTLON": "-094.1996628" }, "geometry": { "type": "Point", "coordinates": [-94.19188592103323, 46.33475653100313] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "24", "STATENS": "01714934", "GEOID": "24", "STUSPS": "MD", "NAME": "Maryland", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 25150696145, "AWATER": 6980371026, "INTPTLAT": "+38.9466584", "INTPTLON": "-076.6744939" }, "geometry": { "type": "Point", "coordinates": [-76.66772148299316, 38.94444040454543] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "44", "STATENS": "01219835", "GEOID": "44", "STUSPS": "RI", "NAME": "Rhode Island", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 2677997539, "AWATER": 1323452846, "INTPTLAT": "+41.5974187", "INTPTLON": "-071.5272723" }, "geometry": { "type": "Point", "coordinates": [-71.55085479678428, 41.61165764241878] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "16", "STATENS": "01779783", "GEOID": "16", "STUSPS": "ID", "NAME": "Idaho", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 214048160737, "AWATER": 2393355752, "INTPTLAT": "+44.3484222", "INTPTLON": "-114.5588538" }, "geometry": { "type": "Point", "coordinates": [-114.67096396779155, 44.40224213868238] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "33", "STATENS": "01779794", "GEOID": "33", "STUSPS": "NH", "NAME": "New Hampshire", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 23187445452, "AWATER": 1028643155, "INTPTLAT": "+43.6726907", "INTPTLON": "-071.5843145" }, "geometry": { "type": "Point", "coordinates": [-71.54997269179164, 43.633555253957184] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "37", "STATENS": "01027616", "GEOID": "37", "STUSPS": "NC", "NAME": "North Carolina", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 125919712692, "AWATER": 13470113896, "INTPTLAT": "+35.5397100", "INTPTLON": "-079.1308636" }, "geometry": { "type": "Point", "coordinates": [-79.12667449990052, 35.52049677522986] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "50", "STATENS": "01779802", "GEOID": "50", "STUSPS": "VT", "NAME": "Vermont", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 23873457570, "AWATER": 1031134839, "INTPTLAT": "+44.0604795", "INTPTLON": "-072.6733274" }, "geometry": { "type": "Point", "coordinates": [-72.63818092179392, 44.07890791896476] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "09", "STATENS": "01779780", "GEOID": "09", "STUSPS": "CT", "NAME": "Connecticut", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 12542619303, "AWATER": 1815495323, "INTPTLAT": "+41.5798637", "INTPTLON": "-072.7466572" }, "geometry": { "type": "Point", "coordinates": [-72.76394868231337, 41.574015485862326] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "10", "STATENS": "01779781", "GEOID": "10", "STUSPS": "DE", "NAME": "Delaware", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 5047241079, "AWATER": 1398670234, "INTPTLAT": "+38.9986239", "INTPTLON": "-075.4416920" }, "geometry": { "type": "Point", "coordinates": [-75.45632127117186, 38.97448339115796] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "35", "STATENS": "00897535", "GEOID": "35", "STUSPS": "NM", "NAME": "New Mexico", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 314191415563, "AWATER": 733669653, "INTPTLAT": "+34.4346843", "INTPTLON": "-106.1316181" }, "geometry": { "type": "Point", "coordinates": [-106.10531844018591, 34.4232102512173] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "9", "STATEFP": "06", "STATENS": "01779778", "GEOID": "06", "STUSPS": "CA", "NAME": "California", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 403483182192, "AWATER": 20484637928, "INTPTLAT": "+37.1551773", "INTPTLON": "-119.5434183" }, "geometry": { "type": "Point", "coordinates": [-119.66990894410122, 37.25783512299458] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "2", "STATEFP": "34", "STATENS": "01779795", "GEOID": "34", "STUSPS": "NJ", "NAME": "New Jersey", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 19049723313, "AWATER": 3542963551, "INTPTLAT": "+40.1072744", "INTPTLON": "-074.6652012" }, "geometry": { "type": "Point", "coordinates": [-74.65300333739275, 40.13667660090378] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "3", "STATEFP": "55", "STATENS": "01779806", "GEOID": "55", "STUSPS": "WI", "NAME": "Wisconsin", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 140275464079, "AWATER": 29359527964, "INTPTLAT": "+44.6309071", "INTPTLON": "-089.7093916" }, "geometry": { "type": "Point", "coordinates": [-89.70511540559427, 44.631878178937164] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "9", "STATEFP": "41", "STATENS": "01155107", "GEOID": "41", "STUSPS": "OR", "NAME": "Oregon", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 248604328809, "AWATER": 6195045325, "INTPTLAT": "+43.9717125", "INTPTLON": "-120.6229578" }, "geometry": { "type": "Point", "coordinates": [-120.62697517175559, 43.940702927302105] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "31", "STATENS": "01779792", "GEOID": "31", "STUSPS": "NE", "NAME": "Nebraska", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 198957965731, "AWATER": 1370523694, "INTPTLAT": "+41.5433014", "INTPTLON": "-099.8118616" }, "geometry": { "type": "Point", "coordinates": [-99.80610682996802, 41.525412725114165] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "2", "STATEFP": "42", "STATENS": "01779798", "GEOID": "42", "STUSPS": "PA", "NAME": "Pennsylvania", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 115881477379, "AWATER": 3397554419, "INTPTLAT": "+40.9024957", "INTPTLON": "-077.8334514" }, "geometry": { "type": "Point", "coordinates": [-77.84296125556834, 40.899650637371366] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "9", "STATEFP": "53", "STATENS": "01779804", "GEOID": "53", "STUSPS": "WA", "NAME": "Washington", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 172111800165, "AWATER": 12560067439, "INTPTLAT": "+47.4073238", "INTPTLON": "-120.5757999" }, "geometry": { "type": "Point", "coordinates": [-120.59547407108795, 47.41806619010244] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "7", "STATEFP": "22", "STATENS": "01629543", "GEOID": "22", "STUSPS": "LA", "NAME": "Louisiana", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 111904803121, "AWATER": 23746413153, "INTPTLAT": "+30.8634368", "INTPTLON": "-091.7987173" }, "geometry": { "type": "Point", "coordinates": [-91.87330637272306, 30.938793863968158] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "13", "STATENS": "01705317", "GEOID": "13", "STUSPS": "GA", "NAME": "Georgia", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 149177524294, "AWATER": 4733385577, "INTPTLAT": "+32.6295789", "INTPTLON": "-083.4235109" }, "geometry": { "type": "Point", "coordinates": [-83.41949204590576, 32.66103730376576] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "6", "STATEFP": "01", "STATENS": "01779775", "GEOID": "01", "STUSPS": "AL", "NAME": "Alabama", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 131174431216, "AWATER": 4592944701, "INTPTLAT": "+32.7396323", "INTPTLON": "-086.8434593" }, "geometry": { "type": "Point", "coordinates": [-86.84041027700933, 32.751931151230345] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "49", "STATENS": "01455989", "GEOID": "49", "STUSPS": "UT", "NAME": "Utah", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 212884846341, "AWATER": 7000199770, "INTPTLAT": "+39.3349925", "INTPTLON": "-111.6563326" }, "geometry": { "type": "Point", "coordinates": [-111.6779825356829, 39.32434434595721] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "3", "STATEFP": "39", "STATENS": "01085497", "GEOID": "39", "STUSPS": "OH", "NAME": "Ohio", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 105833282399, "AWATER": 10264451012, "INTPTLAT": "+40.4149297", "INTPTLON": "-082.7119975" }, "geometry": { "type": "Point", "coordinates": [-82.72269271109485, 40.418849685247565] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "7", "STATEFP": "48", "STATENS": "01779801", "GEOID": "48", "STUSPS": "TX", "NAME": "Texas", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 676641930188, "AWATER": 19017521093, "INTPTLAT": "+31.4347032", "INTPTLON": "-099.2818238" }, "geometry": { "type": "Point", "coordinates": [-99.30590020392445, 31.446710478464258] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "08", "STATENS": "01779779", "GEOID": "08", "STUSPS": "CO", "NAME": "Colorado", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 268425964573, "AWATER": 1178495763, "INTPTLAT": "+38.9938482", "INTPTLON": "-105.5083165" }, "geometry": { "type": "Point", "coordinates": [-105.54795691501886, 38.999326865377824] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "45", "STATENS": "01779799", "GEOID": "45", "STUSPS": "SC", "NAME": "South Carolina", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 77862731483, "AWATER": 5071381300, "INTPTLAT": "+33.8741776", "INTPTLON": "-080.8542639" }, "geometry": { "type": "Point", "coordinates": [-80.81510405769912, 33.851171417896595] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "7", "STATEFP": "40", "STATENS": "01102857", "GEOID": "40", "STUSPS": "OK", "NAME": "Oklahoma", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 177664450004, "AWATER": 3373087228, "INTPTLAT": "+35.5900512", "INTPTLON": "-097.4868149" }, "geometry": { "type": "Point", "coordinates": [-97.5156398278746, 35.59331088858157] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "6", "STATEFP": "47", "STATENS": "01325873", "GEOID": "47", "STUSPS": "TN", "NAME": "Tennessee", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 106798015774, "AWATER": 2354836197, "INTPTLAT": "+35.8585557", "INTPTLON": "-086.3493580" }, "geometry": { "type": "Point", "coordinates": [-86.36223837406784, 35.83745890413959] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "56", "STATENS": "01779807", "GEOID": "56", "STUSPS": "WY", "NAME": "Wyoming", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 251465641446, "AWATER": 1860628076, "INTPTLAT": "+42.9918024", "INTPTLON": "-107.5419255" }, "geometry": { "type": "Point", "coordinates": [-107.55225597694596, 42.999561020115074] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "9", "STATEFP": "15", "STATENS": "01779782", "GEOID": "15", "STUSPS": "HI", "NAME": "Hawaii", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 16634117742, "AWATER": 11777681513, "INTPTLAT": "+22.0120383", "INTPTLON": "-159.7059653" }, "geometry": { "type": "Point", "coordinates": [-156.47382628760445, 20.249557029832406] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "38", "STATENS": "01779797", "GEOID": "38", "STUSPS": "ND", "NAME": "North Dakota", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 178710423375, "AWATER": 4400396641, "INTPTLAT": "+47.4421740", "INTPTLON": "-100.4608258" }, "geometry": { "type": "Point", "coordinates": [-100.48067659360159, 47.44648585772262] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "6", "STATEFP": "21", "STATENS": "01779786", "GEOID": "21", "STUSPS": "KY", "NAME": "Kentucky", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 102266092821, "AWATER": 2388731561, "INTPTLAT": "+37.5336844", "INTPTLON": "-085.2929801" }, "geometry": { "type": "Point", "coordinates": [-85.29059692124132, 37.50118052017616] } }, { "type": "Feature", "properties": { "REGION": "9", "DIVISION": "0", "STATEFP": "78", "STATENS": "01802710", "GEOID": "78", "STUSPS": "VI", "NAME": "United States Virgin Islands", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 348013711, "AWATER": 1550244357, "INTPTLAT": "+18.3267484", "INTPTLON": "-064.9712505" }, "geometry": { "type": "Point", "coordinates": [-64.94988056268419, 18.333475193241732] } }, { "type": "Feature", "properties": { "REGION": "9", "DIVISION": "0", "STATEFP": "69", "STATENS": "01779809", "GEOID": "69", "STUSPS": "MP", "NAME": "Commonwealth of the Northern Mariana Islands", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 472284356, "AWATER": 4644260632, "INTPTLAT": "+14.9367835", "INTPTLON": "+145.6010210" }, "geometry": { "type": "Point", "coordinates": [145.741780127815, 15.192767337774256] } }, { "type": "Feature", "properties": { "REGION": "9", "DIVISION": "0", "STATEFP": "66", "STATENS": "01802705", "GEOID": "66", "STUSPS": "GU", "NAME": "Guam", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 543558310, "AWATER": 934334983, "INTPTLAT": "+13.4382886", "INTPTLON": "+144.7729493" }, "geometry": { "type": "Point", "coordinates": [144.78573763562926, 13.46666386068822] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "23", "STATENS": "01779787", "GEOID": "23", "STUSPS": "ME", "NAME": "Maine", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 79885808421, "AWATER": 11748168571, "INTPTLAT": "+45.4092789", "INTPTLON": "-068.6665979" }, "geometry": { "type": "Point", "coordinates": [-69.21667333760858, 45.257277242278235] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "2", "STATEFP": "36", "STATENS": "01779796", "GEOID": "36", "STUSPS": "NY", "NAME": "New York", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 122048992746, "AWATER": 19247151848, "INTPTLAT": "+42.9133974", "INTPTLON": "-075.5962723" }, "geometry": { "type": "Point", "coordinates": [-75.61811278092645, 42.93002690506416] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "32", "STATENS": "01779793", "GEOID": "32", "STUSPS": "NV", "NAME": "Nevada", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 284329327067, "AWATER": 2047350803, "INTPTLAT": "+39.3310928", "INTPTLON": "-116.6151469" }, "geometry": { "type": "Point", "coordinates": [-116.66112537878229, 39.361249479006034] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "9", "STATEFP": "02", "STATENS": "01785533", "GEOID": "02", "STUSPS": "AK", "NAME": "Alaska", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 1478588231566, "AWATER": 277723861311, "INTPTLAT": "+63.2813242", "INTPTLON": "-152.5730397" }, "geometry": { "type": "Point", "coordinates": [-154.4766053740451, 60.82770156548916] } }, { "type": "Feature", "properties": { "REGION": "9", "DIVISION": "0", "STATEFP": "60", "STATENS": "01802701", "GEOID": "60", "STUSPS": "AS", "NAME": "American Samoa", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 197759070, "AWATER": 1307243753, "INTPTLAT": "-14.2668475", "INTPTLON": "-170.6671854" }, "geometry": { "type": "Point", "coordinates": [-170.64978552591714, -14.299470769810364] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "3", "STATEFP": "26", "STATENS": "01779789", "GEOID": "26", "STUSPS": "MI", "NAME": "Michigan", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 146488062160, "AWATER": 103998746281, "INTPTLAT": "+44.8441757", "INTPTLON": "-085.6604930" }, "geometry": { "type": "Point", "coordinates": [-85.73088809989049, 44.85730142827577] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "7", "STATEFP": "05", "STATENS": "00068085", "GEOID": "05", "STUSPS": "AR", "NAME": "Arkansas", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 134768100673, "AWATER": 2963631791, "INTPTLAT": "+34.8955256", "INTPTLON": "-092.4446262" }, "geometry": { "type": "Point", "coordinates": [-92.42535891581502, 34.91445426486912] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "6", "STATEFP": "28", "STATENS": "01779790", "GEOID": "28", "STUSPS": "MS", "NAME": "Mississippi", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 121530256608, "AWATER": 3930182746, "INTPTLAT": "+32.6864714", "INTPTLON": "-089.6561377" }, "geometry": { "type": "Point", "coordinates": [-89.65624593201976, 32.71237571006055] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "29", "STATENS": "01779791", "GEOID": "29", "STUSPS": "MO", "NAME": "Missouri", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 178052037005, "AWATER": 2488190402, "INTPTLAT": "+38.3507500", "INTPTLON": "-092.4567826" }, "geometry": { "type": "Point", "coordinates": [-92.50032837863908, 38.3956945741332] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "30", "STATENS": "00767982", "GEOID": "30", "STUSPS": "MT", "NAME": "Montana", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 376960880222, "AWATER": 3871059371, "INTPTLAT": "+47.0511771", "INTPTLON": "-109.6348174" }, "geometry": { "type": "Point", "coordinates": [-109.62306130380288, 47.03712159095137] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "20", "STATENS": "00481813", "GEOID": "20", "STUSPS": "KS", "NAME": "Kansas", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 211753159949, "AWATER": 1346325556, "INTPTLAT": "+38.4985464", "INTPTLON": "-098.3834298" }, "geometry": { "type": "Point", "coordinates": [-98.39097322628288, 38.48006058337447] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "3", "STATEFP": "18", "STATENS": "00448508", "GEOID": "18", "STUSPS": "IN", "NAME": "Indiana", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 92787765193, "AWATER": 1539541677, "INTPTLAT": "+39.9030256", "INTPTLON": "-086.2839503" }, "geometry": { "type": "Point", "coordinates": [-86.28491160320901, 39.89081658038561] } }, { "type": "Feature", "properties": { "REGION": "9", "DIVISION": "0", "STATEFP": "72", "STATENS": "01779808", "GEOID": "72", "STUSPS": "PR", "NAME": "Puerto Rico", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 8868734851, "AWATER": 4922543816, "INTPTLAT": "+18.2176480", "INTPTLON": "-066.4107992" }, "geometry": { "type": "Point", "coordinates": [-66.33670708342012, 18.198839469252444] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "46", "STATENS": "01785534", "GEOID": "46", "STUSPS": "SD", "NAME": "South Dakota", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 196345228871, "AWATER": 3384471850, "INTPTLAT": "+44.4467957", "INTPTLON": "-100.2381762" }, "geometry": { "type": "Point", "coordinates": [-100.23282394621592, 44.43512790242559] } }, { "type": "Feature", "properties": { "REGION": "1", "DIVISION": "1", "STATEFP": "25", "STATENS": "00606926", "GEOID": "25", "STUSPS": "MA", "NAME": "Massachusetts", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 20204287539, "AWATER": 7130763257, "INTPTLAT": "+42.1565196", "INTPTLON": "-071.4895915" }, "geometry": { "type": "Point", "coordinates": [-71.64585840485103, 42.205165988418536] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "51", "STATENS": "01779803", "GEOID": "51", "STUSPS": "VA", "NAME": "Virginia", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 102254240128, "AWATER": 8532012665, "INTPTLAT": "+37.5222512", "INTPTLON": "-078.6681938" }, "geometry": { "type": "Point", "coordinates": [-78.66167784709191, 37.49642334020407] } }, { "type": "Feature", "properties": { "REGION": "3", "DIVISION": "5", "STATEFP": "11", "STATENS": "01702382", "GEOID": "11", "STUSPS": "DC", "NAME": "District of Columbia", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 158351639, "AWATER": 18675956, "INTPTLAT": "+38.9041031", "INTPTLON": "-077.0172290" }, "geometry": { "type": "Point", "coordinates": [-77.02271933333333, 38.872946666666664] } }, { "type": "Feature", "properties": { "REGION": "2", "DIVISION": "4", "STATEFP": "19", "STATENS": "01779785", "GEOID": "19", "STUSPS": "IA", "NAME": "Iowa", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 144664158135, "AWATER": 1081293682, "INTPTLAT": "+42.0700243", "INTPTLON": "-093.4933473" }, "geometry": { "type": "Point", "coordinates": [-93.50299877665576, 42.07769361074824] } }, { "type": "Feature", "properties": { "REGION": "4", "DIVISION": "8", "STATEFP": "04", "STATENS": "01779777", "GEOID": "04", "STUSPS": "AZ", "NAME": "Arizona", "LSAD": "00", "MTFCC": "G4000", "FUNCSTAT": "A", "ALAND": 294198661567, "AWATER": 1027245114, "INTPTLAT": "+34.2039355", "INTPTLON": "-111.6063565" }, "geometry": { "type": "Point", "coordinates": [-111.67811300171705, 34.28979094620758] } }]
+                        }
+                    });
+                    map.addLayer({
+                        'id': 'plus',
+                        'type': 'symbol',
+                        'source': 'point',
+                        //'maxzoom': 4,
+                        'layout': {
+                            'icon-image': 'plusIcon',
+                            'icon-size': 0.4
+                        }
+                    });
+                }
+            );
+
+            // // Add the source to query. In this example we're using
+            // // county polygons uploaded as vector tiles
+            map.addSource('counties', {
+                'type': 'vector',
+                'url': 'mapbox://benderlidze.arihhy0b'
+            });
+
+            map.addLayer(
+                {
+                    'id': 'counties',
+                    'type': 'fill',
+                    'source': 'counties',
+                    'source-layer': 'c_03mr20_1-5or977',
+                    'paint': {
+                        'fill-outline-color': 'rgba(0,0,0,0.1)',
+                        'fill-color': 'rgba(0,0,0,0.1)'
+                    }
+                },
+                'settlement-label'
+            ); // Place polygon under these labels.
+
+            map.addLayer(
+                {
+                    'id': 'counties-highlighted',
+                    'type': 'fill',
+                    'source': 'counties',
+                    'source-layer': 'c_03mr20_1-5or977',
+                    'paint': {
+                        'fill-outline-color': '#484896',
+                        'fill-color': '#6e599f',
+                        'fill-opacity': 0.75
+                    },
+                    'filter': ['in', 'COUNTY', '']
+                },
+                'settlement-label'
+            ); // Place polygon under these labels.
+
+            map.addLayer(
+                {
+                    'id': 'counties-hovered',
+                    'type': 'fill',
+                    'source': 'counties',
+                    // 'minzoom': 4,
+                    'source-layer': 'c_03mr20_1-5or977',
+                    'paint': {
+                        'fill-outline-color': '#484896',
+                        'fill-color': 'red',
+                        'fill-opacity': 0.75
+                    },
+                    'filter': ['in', 'COUNTY', '']
+                },
+                'settlement-label'
+            ); // Place polygon under these labels.
+
+            map.on('mousemove', 'counties', function (e) {
+                map.getCanvas().style.cursor = 'pointer';
+                var feature = e.features[0];
+                const fipsId = e.features[0].properties.FIPS
+                map.setFilter('counties-hovered', [
+                    'in',
+                    'FIPS',
+                    fipsId
+                ]);
+                const state = allRecords.filter(i => +i.fips === +fipsId)
+                const text = `
+                    ${state[0].county_name}<br>
+                    ${state[0].state_name}
+                `
+                popup
+                    .setLngLat(e.lngLat)
+                    .setHTML(text)
+                    .addTo(map);
+            });
+
+            map.on('click', 'counties', function (e) {
+                // Change the cursor style as a UI indicator.
+                const FIPS = e.features[0].properties.FIPS;
+                console.log('E!!!!', e);
+                allRecords.filter(i => i.fips === +FIPS).forEach(i => tableRecords_.toggleByFIPS(i))//add all counties from state 
+                updateTable()
+                updateMap()
+            });
+
+            map.on('mouseleave', 'counties', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+            //plus icon 
+            map.on('mousemove', 'plus', function (e) {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            map.on('click', 'plus', function (e) {
+                const STATEFP = e.features[0].properties.STATEFP;
+                selectByStateFIPS(STATEFP)
+                updateTable()
+                updateMap()
+            });
+
+            map.on('mouseleave', 'plus', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+        });
+
+
+        function selectByStateFIPS(fips) {
+            allRecords.filter(i => i.state === +fips).forEach(i => tableRecords_.addRow(i))//add all counties from state 
+        }
+
+
+        function updateMap() {
+            console.log('Update map');
+            const s = tableRecords_.getAllRows().map(i => {
+                return zeroPad(i.fips, 5) // leading 0 for California etc "06023"
+            })
+            map.setFilter('counties-highlighted', [
+                'in',
+                'FIPS',
+                ...s
+            ]);
+            //map.setPaintProperty('counties-highlighted', 'fill-color', color);
+        }
+
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+        document.addEventListener("click", (e) => {
+
+            console.log('e', e);
+            const classList = e.target.classList;
+            console.log('classList', classList);
+
+            if (classList.contains("getJSON")) {
+                const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
+                    return {
+                        "type": "Feature",
+                        "id": i.id,
+                        "properties": i.properties,
+                        "geometry": i.geometry
+                    }
+                })
+                const geojson = {
+                    "type": "FeatureCollection",
+                    "features": jsonData
+                }
+                downloadObjectAsJson(geojson, "county.geojson")
+            }
+
+            if (classList.contains("saveSelection")) {
+                savedCounties.push({
+                    id: Date.now(),
+                    selectedFIPS: [...tableRecords_.getAllRows()]
+                });
+                printSelections()
+            }
+
+            if (classList.contains("newSelection")) {
+                tableRecords_.clearAllRows();
+                updateMap()
+                updateTable()
+            }
+
+            if (classList.contains("loadSelection")) {
+
+                const selectionId = e.target.id;
+                const index = savedCounties.findIndex(i => +i.id === +e.target.id)
+                const color = shades[index] || '#fff';
+                const fips = [];
+
+                savedCounties[index].selectedFIPS.forEach(s => {
+                    //tableRecords_.addRow(s)
+                    fips.push(s.fips.toString());
+                })
+
+                const layerId = 'counties-selected-' + selectionId;
+
+                if (map.getLayer(layerId)) { map.removeLayer(layerId) }
+                map.addLayer(
+                    {
+                        'id': layerId,
+                        'type': 'fill',
+                        'source': 'counties',
+                        'source-layer': 'c_03mr20_1-5or977',
+                        'paint': {
+                            'fill-outline-color': 'rgba(0,0,0,0.1)',
+                            'fill-color': color
+                        },
+                        'filter': ['in', 'FIPS', ...fips]
+                    },
+                    'counties-highlighted'
+                );
+
+                const layers = map.getStyle().layers.filter(i => i.source === "counties")
+
+                updateMap();
+                updateTable()
+            }
+
+            if (classList.contains("savedLayers")) {
+                [...document.querySelectorAll(".savedLayers")].forEach((i, key) => {
+
+                    const selectionId = i.id;
+                    const index = savedCounties.findIndex(i => +i.id === +selectionId)
+                    const color = shades[index] || '#fff';
+                    const fips = [];
+
+                    savedCounties[index].selectedFIPS.forEach(s => {
+                        //tableRecords_.addRow(s)
+                        fips.push(s.fips.toString());
+                    })
+
+                    const layerId = 'counties-selected-' + selectionId;
+
+                    savedCounties[key].selectedFIPS.forEach(s => {
+                        //tableRecords_.addRow(s)
+                        fips.push(s.fips.toString());
+                    })
+
+                    if (map.getLayer(layerId)) { map.removeLayer(layerId) }// remove just in case;
+                    if (i.checked) {
+                        map.addLayer(
+                            {
+                                'id': layerId,
+                                'type': 'fill',
+                                'source': 'counties',
+                                'source-layer': 'c_03mr20_1-5or977',
+                                'paint': {
+                                    'fill-outline-color': 'rgba(0,0,0,0.1)',
+                                    'fill-color': color
+                                },
+                                'filter': ['in', 'FIPS', ...fips]
+                            },
+                            'counties-highlighted'
+                        );
+                    }
+                })
+            }
+        })
+
+        function printSelections() {
+            savedSelections.innerHTML = savedCounties.map((i, key) => {
+                return `<div> 
+                            <input type="checkbox" id="${i.id}" class="savedLayers" data-toggle="toggle" data-size="mini">
+                            <div style="height:12px;width:30px;display:inline-block;background-color:${shades[key]}"></div> 
+                            ${i.id} - Counties: ${i.selectedFIPS.length} 
+                            <button class="btn btn-primary btn-sm loadSelection" id="${i.id}">Load</button>
+                        </div>`
+            }).join("")
+        }
+
+        function downloadObjectAsJson(exportObj, exportName) {
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+            var downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", exportName + ".json");
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+
+        fetch('countiesFIPS.json')
+            .then(i => i.json())
+            .then(i => {
+                console.log('i', i);
+                allRecords = i;
+
+                $("#input-county").autocomplete({
+                    source: function (request, response) {
+                        var array = $.map(allRecords, function (item, key) {
+                            return {
+                                label: item.county_name,
+                                value: item.county_name,
+                                obj: item,
+                                idx: key
+                            };
+                        })
+                        response($.ui.autocomplete.filter(array, request.term));
+                    }, select: function (event, ui) {
+                        newRow = ui.item.obj; // selected item
+                    }
+                });
+
+            })
+
+
+        // Initialize Data table with tableRecords array
+        countyTable = $('#countyTable').DataTable({
+            "data": tableRecords_.getAllRows(),
+            "aaSorting": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }],
+            "columns": [
+                { "data": "fips" }, // this is hidden on front end
+                { "data": "county_name" },
+                { "data": "state_name" },
+                {
+                    'render': function (data, type, full, meta) {
+                        return '<span class="delete-record">Delete</span>';
+                    }
+                }
+            ]
+        });
+
+
+        // Adding selected item in data table
+        $('#addRow').on('click', function () {
+            if (typeof newRow != 'undefined') {
+                $("#input-county").val('');
+                if (newRow.fips < 100) { // it is a state
+                    console.log('newRow', newRow);
+                    allRecords.filter(i => i.state === +newRow.fips).forEach(i => tableRecords_.addRow(i))//add all counties from state 
+                } else {
+                    tableRecords_.addRow(newRow)
+                }
+                onTableUpdate()
+            }
+            else {
+                alert("Please Select Valid County")
+            }
+        });
+
+        // delete record from table
+        $('.county-table').on('click', 'tr .delete-record', function () {
+            var deleteRowId = $(this).parents('tr').find("td:first").text();
+            console.log('deleteRowId', deleteRowId);
+            tableRecords_.deleteRow(deleteRowId);
+            onTableUpdate()
+        })
+
+        function onTableUpdate() {
+            const fips = tableRecords_.getAllRows().map(i => {
+                return i.fips;
+            })
+            updateMap(fips)
+            updateTable()
+        }
+
+        function updateTable() {
+            countyTable.clear();
+            countyTable.rows.add(tableRecords_.getAllRows());
+            countyTable.draw();
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
