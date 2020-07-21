@@ -687,7 +687,7 @@
         <div class="col-4">
 
             <div>
-                <button class="btn btn-success getJSON"><i class="fa fa-save"></i> Json</button>
+                <!--<button class="btn btn-success getJSON"><i class="fa fa-save"></i> Json</button>-->
                 <button class="btn btn-success text-uppercase saveSelection"><i class="fa fa-save"></i> Save </button>
                 <button class="btn btn-danger newSelection">Clear all</button>
             </div>
@@ -980,7 +980,7 @@
             console.log('classList', classList);
 
             if (classList.contains("getJSON")) {
-
+                downloadAsJson()
             }
 
             if (classList.contains("saveSelection")) {
@@ -1065,7 +1065,7 @@
                 showSavedLayers()
             }
         })
-        
+
         function downloadAsJson() {
             const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
                 return {
