@@ -641,10 +641,10 @@
             border-left: 1px solid #ddd;
         }
 
-        .county-table td:first-child,
+        /* .county-table td:first-child,
         .county-table th:first-child {
-            /* display: none; */
-        }
+            display: none;
+        } */
 
         .add-row {
             margin-bottom: 20px;
@@ -975,28 +975,20 @@
 
         document.addEventListener("click", (e) => {
 
-            console.log('e', e);
+            console.log('EEEEEe', e);
             const classList = e.target.classList;
             console.log('classList', classList);
 
             if (classList.contains("getJSON")) {
-                const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
-                    return {
-                        "type": "Feature",
-                        "id": i.id,
-                        "properties": i.properties,
-                        "geometry": i.geometry
-                    }
-                })
-                const geojson = {
-                    "type": "FeatureCollection",
-                    "features": jsonData
-                }
-                downloadObjectAsJson(geojson, "county.geojson")
+
             }
 
             if (classList.contains("saveSelection")) {
 
+                if (tableRecords_.getAllRows().length === 0) {
+                    alert("empty selection")
+                    return;
+                }
                 savedCounties.push({
                     id: Date.now(),
                     selectedFIPS: [...tableRecords_.getAllRows()]
@@ -1013,7 +1005,7 @@
             if (classList.contains("editSelection")) {
 
                 clearMap()
-                
+
                 const selectionId = e.target.id;
                 const index = savedCounties.findIndex(i => +i.id === +e.target.id)
                 const color = shades[index] || '#fff';
@@ -1024,71 +1016,107 @@
                     fips.push(s.fips.toString());
                 })
 
-                const layerId = 'counties-selected-' + selectionId;
-
-                if (map.getLayer(layerId)) { map.removeLayer(layerId) }
-                map.addLayer(
-                    {
-                        'id': layerId,
-                        'type': 'fill',
-                        'source': 'counties',
-                        'source-layer': 'c_03mr20_1-5or977',
-                        'paint': {
-                            'fill-outline-color': 'rgba(0,0,0,0.1)',
-                            'fill-color': color
-                        },
-                        'filter': ['in', 'FIPS', ...fips]
-                    },
-                    'counties-highlighted'
-                );
-
-                const layers = map.getStyle().layers.filter(i => i.source === "counties")
+                // const layerId = 'counties-selected-' + selectionId;
+                // if (map.getLayer(layerId)) { map.removeLayer(layerId) }
+                // map.addLayer(
+                //     { 
+                //         'id': layerId,
+                //         'type': 'fill',
+                //         'source': 'counties',
+                //         'source-layer': 'c_03mr20_1-5or977',
+                //         'paint': {
+                //             'fill-outline-color': 'rgba(0,0,0,0.1)',
+                //             'fill-color': color
+                //         },
+                //         'filter': ['in', 'FIPS', ...fips]
+                //     },
+                //     'counties-highlighted'
+                // );
+                //show save button 
+                const f = [...document.getElementsByClassName("saveChages")].forEach(i => i.classList.add("d-none"));
+                document.getElementById("save_" + selectionId).classList.remove("d-none");
 
                 updateMap();
                 updateTable()
             }
+            if (classList.contains("saveChages")) {
+
+                console.log('e.target', e.target);
+                const selectionId = e.target.parentElement.id;
+                const index = savedCounties.findIndex(i => +i.id === +selectionId)
+                const color = shades[index] || '#fff';
+                const fips = [];
+
+                //hide save button 
+                e.target.classList.add("d-none");
+
+                //update data 
+                console.log('savedCounties[index].selectedFIPS', index, savedCounties[index].selectedFIPS, tableRecords_.getAllRows());
+                savedCounties[index].selectedFIPS = [...tableRecords_.getAllRows()];
+
+                clearMap()
+                updateMap();
+                updateTable()
+                showSavedLayers()//redraw saved layers 
+
+            }
 
             if (classList.contains("savedLayers")) {
-                [...document.querySelectorAll(".savedLayers")].forEach((i, key) => {
-
-                    const selectionId = i.id;
-                    const index = savedCounties.findIndex(i => +i.id === +selectionId)
-                    const color = shades[index] || '#fff';
-                    const fips = [];
-
-                    savedCounties[index].selectedFIPS.forEach(s => {
-                        //tableRecords_.addRow(s)
-                        fips.push(s.fips.toString());
-                    })
-
-                    const layerId = 'counties-selected-' + selectionId;
-
-                    savedCounties[key].selectedFIPS.forEach(s => {
-                        //tableRecords_.addRow(s)
-                        fips.push(zeroPad(s.fips, 5));
-                    })
-
-                    if (map.getLayer(layerId)) { map.removeLayer(layerId) }// remove just in case;
-                    if (i.checked) {
-                        map.addLayer(
-                            {
-                                'id': layerId,
-                                'type': 'fill',
-                                'source': 'counties',
-                                'source-layer': 'c_03mr20_1-5or977',
-                                'paint': {
-                                    'fill-outline-color': 'rgba(0,0,0,0.1)',
-                                    'fill-color': color
-                                },
-                                'filter': ['in', 'FIPS', ...fips]
-                            },
-                            'counties-highlighted'
-                        );
-                    }
-                })
+                showSavedLayers()
             }
         })
+        
+        function downloadAsJson() {
+            const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
+                return {
+                    "type": "Feature",
+                    "id": i.id,
+                    "properties": i.properties,
+                    "geometry": i.geometry
+                }
+            })
+            const geojson = {
+                "type": "FeatureCollection",
+                "features": jsonData
+            }
+            downloadObjectAsJson(geojson, "county.geojson")
+        }
 
+        function showSavedLayers() {
+            [...document.querySelectorAll(".savedLayers")].forEach((i, key) => {
+                const selectionId = i.id;
+                const index = savedCounties.findIndex(i => +i.id === +selectionId)
+                const color = shades[index] || '#fff';
+                const fips = [];
+                savedCounties[index].selectedFIPS.forEach(s => {
+                    //tableRecords_.addRow(s)
+                    fips.push(s.fips.toString());
+                })
+                const layerId = 'counties-selected-' + selectionId;
+                savedCounties[key].selectedFIPS.forEach(s => {
+                    //tableRecords_.addRow(s)
+                    fips.push(zeroPad(s.fips, 5));
+                })
+
+                if (map.getLayer(layerId)) { map.removeLayer(layerId) }// remove just in case;
+                if (i.checked) {
+                    map.addLayer(
+                        {
+                            'id': layerId,
+                            'type': 'fill',
+                            'source': 'counties',
+                            'source-layer': 'c_03mr20_1-5or977',
+                            'paint': {
+                                'fill-outline-color': 'rgba(0,0,0,0.1)',
+                                'fill-color': color
+                            },
+                            'filter': ['in', 'FIPS', ...fips]
+                        },
+                        'counties-highlighted'
+                    );
+                }
+            })
+        }
         function clearMap() {
             tableRecords_.clearAllRows();
             updateMap()
@@ -1098,11 +1126,12 @@
 
         function printSelections() {
             savedSelections.innerHTML = savedCounties.map((i, key) => {
-                return `<div> 
+                return `<div id="${i.id}"> 
                             <input type="checkbox" id="${i.id}" class="savedLayers" data-toggle="toggle" data-size="mini">
                             <div style="height:12px;width:30px;display:inline-block;background-color:${shades[key]}"></div> 
                             ${i.id} - Counties: ${i.selectedFIPS.length} 
                             <button id="${i.id}" class="btn btn-success btn-sm editSelection">Edit</button>
+                            <button id="save_${i.id}" class="btn btn-success btn-sm saveChages d-none">Save</button>
                         </div>`
             }).join("")
         }
