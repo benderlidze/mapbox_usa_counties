@@ -749,6 +749,9 @@
                     return false
                 }
             };
+            const getByState = function (stateFips) {
+                return data.filter(i => +i.state === +stateFips);
+            }
             const getAllRows = function () {
                 return data
             }
@@ -774,14 +777,15 @@
                 getAllRows,
                 getRowById,
                 clearAllRows,
-                toggleByFIPS
+                toggleByFIPS,
+                getByState
             });
         }
 
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZGVybGlkemUiLCJhIjoiY2pud3c0MnN1MDdraTN4cXBraDR3MHdyaCJ9.OsQLWGIWOutuIXCHgT8coQ';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
+            style: 'mapbox://styles/mapbox/light-v10',
             center: [-98, 38.88],
             minZoom: 2,
             zoom: 3
@@ -840,7 +844,7 @@
                     'source-layer': 'c_03mr20_1-5or977',
                     'paint': {
                         'fill-outline-color': 'rgba(0,0,0,0.1)',
-                        'fill-color': 'rgba(0,0,0,0.1)'
+                        'fill-color': 'rgba(0,0,0,0)'
                     }
                 },
                 'settlement-label'
@@ -867,7 +871,7 @@
                     'id': 'counties-hovered',
                     'type': 'fill',
                     'source': 'counties',
-                    // 'minzoom': 4,
+                    'minzoom': 3,
                     'source-layer': 'c_03mr20_1-5or977',
                     'paint': {
                         'fill-outline-color': '#484896',
@@ -893,19 +897,24 @@
                     ${state[0].county_name}<br>
                     ${state[0].state_name}
                 `
-                popup
-                    .setLngLat(e.lngLat)
-                    .setHTML(text)
-                    .addTo(map);
+
+                if (map.getZoom() >= 3) {
+                    popup
+                        .setLngLat(e.lngLat)
+                        .setHTML(text)
+                        .addTo(map);
+                }
             });
 
             map.on('click', 'counties', function (e) {
                 // Change the cursor style as a UI indicator.
                 const FIPS = e.features[0].properties.FIPS;
                 console.log('E!!!!', e);
-                allRecords.filter(i => i.fips === +FIPS).forEach(i => tableRecords_.toggleByFIPS(i))//add all counties from state 
-                updateTable()
-                updateMap()
+                if (map.getZoom() >= 3) {
+                    allRecords.filter(i => i.fips === +FIPS).forEach(i => tableRecords_.toggleByFIPS(i))//add all counties from state 
+                    updateTable()
+                    updateMap()
+                }
             });
 
             map.on('mouseleave', 'counties', function () {
@@ -931,9 +940,21 @@
 
         });
 
-
+        const clickStateCount = []
         function selectByStateFIPS(fips) {
+            console.log('fips', fips);
             allRecords.filter(i => i.state === +fips).forEach(i => tableRecords_.addRow(i))//add all counties from state 
+            clickStateCount.push(fips)
+
+            //delete state selection if the number of click is even 
+            const countClicks = clickStateCount.filter(i => i === fips).length
+            if (countClicks % 2 == 0) {
+                //  if (tableRecords_.getByState(fips).length === allRecords.filter(i => i.state === +fips).length) { // only if there are all counties selected 
+                tableRecords_.getByState(fips).forEach(i => {
+                    tableRecords_.deleteRow(i.fips)
+                })
+                //}
+            }
         }
 
 
@@ -975,28 +996,31 @@
             }
 
             if (classList.contains("saveSelection")) {
+
                 savedCounties.push({
                     id: Date.now(),
                     selectedFIPS: [...tableRecords_.getAllRows()]
                 });
                 printSelections()
+
+                clearMap()
             }
 
             if (classList.contains("newSelection")) {
-                tableRecords_.clearAllRows();
-                updateMap()
-                updateTable()
+                clearMap()
             }
 
-            if (classList.contains("loadSelection")) {
+            if (classList.contains("editSelection")) {
 
+                clearMap()
+                
                 const selectionId = e.target.id;
                 const index = savedCounties.findIndex(i => +i.id === +e.target.id)
                 const color = shades[index] || '#fff';
                 const fips = [];
 
                 savedCounties[index].selectedFIPS.forEach(s => {
-                    //tableRecords_.addRow(s)
+                    tableRecords_.addRow(s)
                     fips.push(s.fips.toString());
                 })
 
@@ -1065,12 +1089,20 @@
             }
         })
 
+        function clearMap() {
+            tableRecords_.clearAllRows();
+            updateMap()
+            updateTable()
+
+        }
+
         function printSelections() {
             savedSelections.innerHTML = savedCounties.map((i, key) => {
                 return `<div> 
                             <input type="checkbox" id="${i.id}" class="savedLayers" data-toggle="toggle" data-size="mini">
                             <div style="height:12px;width:30px;display:inline-block;background-color:${shades[key]}"></div> 
                             ${i.id} - Counties: ${i.selectedFIPS.length} 
+                            <button id="${i.id}" class="btn btn-success btn-sm editSelection">Edit</button>
                         </div>`
             }).join("")
         }
