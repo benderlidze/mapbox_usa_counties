@@ -323,19 +323,7 @@
             text-decoration: none;
         }
 
-        .map-details {
-            position: absolute;
-            display: block;
-            width: 480px;
-            right: 0;
-            top: 0;
-            z-index: 1000;
-            padding: 20px;
-            float: right;
-            background: #FFF;
-            height: 100vh;
-            overflow-y: scroll;
-        }
+        .map-details {}
 
         .map-details h2 {
             font-size: 20px;
@@ -679,18 +667,46 @@
 </head>
 
 <body>
+    <!--lgg-->
+    <div class="lgg"> <a class="logo" href="javascript:void(0);">Tect GEO <sup>TM</sup></a> </div>
 
     <div class="row h-100">
-        <div class="col-8">
+        <div class="col-8 p-0">
             <div id="map"></div>
         </div>
         <div class="col-4">
 
             <div>
-                <!--<button class="btn btn-success getJSON"><i class="fa fa-save"></i> Json</button>-->
-                <button class="btn btn-success text-uppercase saveSelection"><i class="fa fa-save"></i> Save </button>
-                <button class="btn btn-danger newSelection">Clear all</button>
+                <div class="map-details">
+                    <h2 class="dropdown">
+                        Welcome <small class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">John Doe</small>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0);">Logout</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        </div>
+                        <a href="javascript:void(0);" class="btn btn-primary fa-pull-right">
+                            <i class="fa fa-arrow-left"></i>
+                            Back to Product Set
+                        </a>
+                    </h2>
+                    <h3><b>Product Set: </b> Concrete and Wood</h3>
+                    <a href="javascript:void(0);" class="btn btn-primary btn-block text-uppercase">Set Primary
+                        Territory</a>
+                    <a href="javascript:void(0);" class="btn btn-info btn-block text-uppercase">Set Secondary
+                        Territory</a>
+                    <h2>Current Territory Selected</h2>
+                    <div class="form-group">
+                        <!--<button class="btn btn-success getJSON"><i class="fa fa-save"></i> Json</button>-->
+                        <button class="btn btn-success text-uppercase saveSelection"><i class="fa fa-save"></i> Save
+                        </button>
+                        <button class="btn btn-danger newSelection">Clear all</button>
+                        <button class="btn btn-primary loadtestData">load test data </button>
+                    </div>
+                </div>
             </div>
+
             <div id="savedSelections"></div>
             <div id="selectedList"></div>
 
@@ -994,12 +1010,15 @@
                     selectedFIPS: [...tableRecords_.getAllRows()]
                 });
                 printSelections()
-
                 clearMap()
             }
 
             if (classList.contains("newSelection")) {
                 clearMap()
+            }
+
+            if (classList.contains("loadtestData")) {
+                loadDataFromApi("test.json")
             }
 
             if (classList.contains("editSelection")) {
@@ -1016,23 +1035,6 @@
                     fips.push(s.fips.toString());
                 })
 
-                // const layerId = 'counties-selected-' + selectionId;
-                // if (map.getLayer(layerId)) { map.removeLayer(layerId) }
-                // map.addLayer(
-                //     { 
-                //         'id': layerId,
-                //         'type': 'fill',
-                //         'source': 'counties',
-                //         'source-layer': 'c_03mr20_1-5or977',
-                //         'paint': {
-                //             'fill-outline-color': 'rgba(0,0,0,0.1)',
-                //             'fill-color': color
-                //         },
-                //         'filter': ['in', 'FIPS', ...fips]
-                //     },
-                //     'counties-highlighted'
-                // );
-                //show save button 
                 const f = [...document.getElementsByClassName("saveChages")].forEach(i => i.classList.add("d-none"));
                 document.getElementById("save_" + selectionId).classList.remove("d-none");
 
@@ -1058,7 +1060,7 @@
                 updateMap();
                 updateTable()
                 showSavedLayers()//redraw saved layers 
-
+                printSelections()
             }
 
             if (classList.contains("savedLayers")) {
@@ -1066,7 +1068,27 @@
             }
         })
 
+        function loadDataFromApi(url) {
+            fetch(url)
+                .then(i => i.json())
+                .then(i => {
+                    console.log('i', i);
+                    savedCounties.push({
+                        id: Date.now(),
+                        selectedFIPS: i
+                    });
+
+
+                    printSelections()
+                })
+                .catch(e => alert("Error!" + e))
+        }
+
         function downloadAsJson() {
+            const json = tableRecords_.getAllRows();
+            downloadObjectAsJson(json, "data.geojson")
+        }
+        function downloadBordersAsJson() {
             const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
                 return {
                     "type": "Feature",
