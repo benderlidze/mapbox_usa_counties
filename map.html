@@ -851,8 +851,6 @@
                 }
             );
 
-            // // Add the source to query. In this example we're using
-            // // county polygons uploaded as vector tiles
             map.addSource('counties', {
                 'type': 'vector',
                 'url': 'mapbox://benderlidze.arihhy0b'
@@ -972,7 +970,6 @@
             //delete state selection if the number of click is even 
             const countClicks = clickStateCount.filter(i => i === fips).length
             if (countClicks % 2 == 0) {
-
                 //update layer with +/- to set - or + for state selection fips
                 icon = "plusIcon"
                 //  if (tableRecords_.getByState(fips).length === allRecords.filter(i => i.state === +fips).length) { // only if there are all counties selected 
@@ -981,7 +978,6 @@
                 })
                 //}
             } else {
-                
                 icon = "minusIcon"
             }
 
@@ -1158,6 +1154,13 @@
         }
         function clearMap() {
             tableRecords_.clearAllRows();
+
+            //reset all minuses to plus
+            plusMinus.features.forEach(i => i.properties.icon = "plusIcon")
+            map.getSource("point").setData(plusMinus)
+            //reset clickStateCount array - should
+            clickStateCount.length = 0
+
             updateMap()
             updateTable()
 
