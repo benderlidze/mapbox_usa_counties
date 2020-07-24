@@ -741,7 +741,7 @@
         const savedSelections = document.getElementById("savedSelections");
         const selectedFIPS = [];
         const savedCounties = [];
-        let countyBorders = [];
+        // let countyBorders = [];
 
 
         //  Array of Table Records
@@ -817,9 +817,9 @@
         map.on('load', function () {
 
             //for the shapefiles in the files folder 
-            shp("counties.zip").then(function (geojson) {
-                countyBorders = geojson
-            });
+            // shp("counties.zip").then(function (geojson) {
+            //     countyBorders = geojson
+            // });
 
             map.loadImage('icons8-minusRed-64.png', function (error, image) {
                 if (error) throw error;
@@ -1098,21 +1098,21 @@
             const json = tableRecords_.getAllRows();
             downloadObjectAsJson(json, "data.geojson")
         }
-        function downloadBordersAsJson() {
-            const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
-                return {
-                    "type": "Feature",
-                    "id": i.id,
-                    "properties": i.properties,
-                    "geometry": i.geometry
-                }
-            })
-            const geojson = {
-                "type": "FeatureCollection",
-                "features": jsonData
-            }
-            downloadObjectAsJson(geojson, "county.geojson")
-        }
+        // function downloadBordersAsJson() {
+        //     const jsonData = countyBorders.features.filter(i => tableRecords_.getAllRows().map(t => +t.fips).includes(+i.properties.FIPS)).map(i => {
+        //         return {
+        //             "type": "Feature",
+        //             "id": i.id,
+        //             "properties": i.properties,
+        //             "geometry": i.geometry
+        //         }
+        //     })
+        //     const geojson = {
+        //         "type": "FeatureCollection",
+        //         "features": jsonData
+        //     }
+        //     downloadObjectAsJson(geojson, "county.geojson")
+        // }
 
         function showSavedLayers() {
             [...document.querySelectorAll(".savedLayers")].forEach((i, key) => {
