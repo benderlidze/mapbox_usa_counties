@@ -801,7 +801,7 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoiamVybWVsbGFkZCIsImEiOiJjazJyc3hndmEwaWY2M29vODZxeXFlZXAxIn0.ouWq4dGYc207H9JJZoPrVA';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v10',
+            style: 'mapbox://styles/jermelladd/ckcppydxx0o281jp8s2tqi280',
             center: [-98, 38.88],
             minZoom: 2,
             zoom: 3
@@ -852,8 +852,11 @@
             );
 
             map.addSource('counties', {
-                'type': 'vector',
-                'url': 'mapbox://benderlidze.arihhy0b'
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': []
+                }
             });
 
             map.addLayer(
@@ -861,7 +864,6 @@
                     'id': 'counties',
                     'type': 'fill',
                     'source': 'counties',
-                    'source-layer': 'c_03mr20_1-5or977',
                     'paint': {
                         'fill-outline-color': 'rgba(0,0,0,0.1)',
                         'fill-color': 'rgba(0,0,0,0)'
@@ -981,7 +983,7 @@
                 icon = "minusIcon"
             }
 
-            console.log('icon@@@@@@@@@@@@@@',icon);
+            console.log('icon@@@@@@@@@@@@@@', icon);
             plusMinus.features.filter(i => +i.properties.STATEFP === +fips).forEach(i => i.properties.icon = icon)
             map.getSource("point").setData(plusMinus)
         }
