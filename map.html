@@ -852,11 +852,8 @@
             );
 
             map.addSource('counties', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': []
-                }
+                'type': 'vector',
+                'url': 'mapbox://jermelladd.9jo5i7av'
             });
 
             map.addLayer(
@@ -864,20 +861,20 @@
                     'id': 'counties',
                     'type': 'fill',
                     'source': 'counties',
+                    'source-layer': 'counties-6zjhr3',
                     'paint': {
                         'fill-outline-color': 'rgba(0,0,0,0.1)',
                         'fill-color': 'rgba(0,0,0,0)'
                     }
                 },
-                'settlement-label'
-            ); // Place polygon under these labels.
+            ); 
 
             map.addLayer(
                 {
                     'id': 'counties-highlighted',
                     'type': 'fill',
                     'source': 'counties',
-                    'source-layer': 'c_03mr20_1-5or977',
+                    'source-layer': 'counties-6zjhr3',
                     'paint': {
                         'fill-outline-color': '#484896',
                         'fill-color': '#6e599f',
@@ -885,8 +882,7 @@
                     },
                     'filter': ['in', 'COUNTY', '']
                 },
-                'settlement-label'
-            ); // Place polygon under these labels.
+            ); 
 
             map.addLayer(
                 {
@@ -894,7 +890,7 @@
                     'type': 'fill',
                     'source': 'counties',
                     'minzoom': 3,
-                    'source-layer': 'c_03mr20_1-5or977',
+                    'source-layer': 'counties-6zjhr3',
                     'paint': {
                         'fill-outline-color': '#484896',
                         'fill-color': 'red',
@@ -902,8 +898,7 @@
                     },
                     'filter': ['in', 'COUNTY', '']
                 },
-                'settlement-label'
-            ); // Place polygon under these labels.
+            ); 
 
             map.on('mousemove', 'counties', function (e) {
                 map.getCanvas().style.cursor = 'pointer';
@@ -983,7 +978,7 @@
                 icon = "minusIcon"
             }
 
-            console.log('icon@@@@@@@@@@@@@@', icon);
+            console.log('icon@@@@@@@@@@@@@@',icon);
             plusMinus.features.filter(i => +i.properties.STATEFP === +fips).forEach(i => i.properties.icon = icon)
             map.getSource("point").setData(plusMinus)
         }
