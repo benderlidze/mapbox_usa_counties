@@ -877,7 +877,7 @@
                     'source-layer': 'counties-6zjhr3',
                     'paint': {
                         'fill-outline-color': '#484896',
-                        'fill-color': '#6e599f',
+                        'fill-color': '#6e599f',           //COUNTY SELECTED COLOR
                         'fill-opacity': 0.75
                     },
                     'filter': ['in', 'COUNTY', '']
@@ -889,11 +889,11 @@
                     'id': 'counties-hovered',
                     'type': 'fill',
                     'source': 'counties',
-                    'minzoom': 3,
+                    'minzoom': 3,                               //COUNTY SELECTED zoom level
                     'source-layer': 'counties-6zjhr3',
                     'paint': {
                         'fill-outline-color': '#484896',
-                        'fill-color': 'red',
+                        'fill-color': 'red',                    //COUNTY HOVER COLOR
                         'fill-opacity': 0.75
                     },
                     'filter': ['in', 'COUNTY', '']
