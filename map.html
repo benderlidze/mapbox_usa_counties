@@ -867,7 +867,7 @@
                         'fill-color': 'rgba(0,0,0,0)'
                     }
                 },
-            ); 
+            );
 
             map.addLayer(
                 {
@@ -882,7 +882,7 @@
                     },
                     'filter': ['in', 'COUNTY', '']
                 },
-            ); 
+            );
 
             map.addLayer(
                 {
@@ -898,7 +898,7 @@
                     },
                     'filter': ['in', 'COUNTY', '']
                 },
-            ); 
+            );
 
             map.on('mousemove', 'counties', function (e) {
                 map.getCanvas().style.cursor = 'pointer';
@@ -978,7 +978,7 @@
                 icon = "minusIcon"
             }
 
-            console.log('icon@@@@@@@@@@@@@@',icon);
+            console.log('icon@@@@@@@@@@@@@@', icon);
             plusMinus.features.filter(i => +i.properties.STATEFP === +fips).forEach(i => i.properties.icon = icon)
             map.getSource("point").setData(plusMinus)
         }
@@ -1039,14 +1039,28 @@
                 const index = savedCounties.findIndex(i => +i.id === +e.target.id)
                 const color = shades[index] || '#fff';
                 const fips = [];
+                const stateFips = [];
 
                 savedCounties[index].selectedFIPS.forEach(s => {
                     tableRecords_.addRow(s)
                     fips.push(s.fips.toString());
+                    stateFips.push(s.state)
                 })
 
                 const f = [...document.getElementsByClassName("saveChages")].forEach(i => i.classList.add("d-none"));
                 document.getElementById("save_" + selectionId).classList.remove("d-none");
+
+                //minus part !!!!
+                console.log('stateFips', stateFips);
+                const uniqueStateFips = [...new Set(stateFips)];
+                uniqueStateFips.forEach(i=>{
+                    const z =  ("0" + i).slice(-2); // add leading zero because states in zip with leading zero are like "06","08" etc
+                    clickStateCount.push(z);
+                })
+                plusMinus.features.filter(i => uniqueStateFips.includes(+i.properties.STATEFP)).forEach(i => i.properties.icon = 'minusIcon')
+                map.getSource("point").setData(plusMinus)
+                //minus part !!!!
+
 
                 updateMap();
                 updateTable()
